@@ -6,7 +6,7 @@ var questions = {
         b: "Beep! Beep!",
         c: "Aooga! Aooga!",
         d: "Vroom! Vroom!",
-        correctAns: "Vroom! Vroom!"
+        correctAns: "Beep! Beep!"
     },
     q2: {
         worth: 200,
@@ -135,14 +135,10 @@ var questions = {
         correctAns: "Richard Nixon"
     }
 }
-
+var questionNumber = 1;
+var currentQuestion = "q" + questionNumber;
 var time = 30;
 var intervalID;
-
-function reset() {
-    correct = 0;
-    wrong = 0;
-}
 
 function start() {
     intervalID = setInterval(countDown, 1000);
@@ -154,59 +150,66 @@ function stop() {
 
 function countDown() {
     time--;
-    $("#time").text(time);
+    $(".timerText").text(time);
     if (time == 0) {
         stop();
-        gameOver();
+        checkAnswers();
     }
+}
+
+function nextQuestion() {
+    $("#question").text(questions[currentQuestion].qText);
+    $("#aText").text(questions[currentQuestion].a);
+    $("#bText").text(questions[currentQuestion].b);
+    $("#cText").text(questions[currentQuestion].c);
+    $("#dText").text(questions[currentQuestion].d);
+    $("div[target='answer']").removeClass("bg-warning text-dark");
+    $("span[target='answerText'").removeClass("selected");
+    $("li").removeClass("activeList");
+    $("#" + questions[currentQuestion].worth).addClass("activeList");
 }
 
 function checkAnswers() {
-    if ($("input[name='tq1']:checked").val() == tq1) {
-        correct++;
-        console.log(correct);
+    console.log($(".selected").text());
+    console.log(questions[currentQuestion].correctAns);
+    if ($(".selected").text() == questions[currentQuestion].correctAns) {
+        questionNumber++;
+        currentQuestion = "q" + questionNumber;
+        nextQuestion();
     }
     else {
-        wrong++;
-        console.log(wrong);
+    console.log("wrong");
     }
-
-    if ($("input[name='tq2']:checked").val() == tq2) {
-        correct++;
-        console.log(correct);
-    }
-    else {
-        wrong++;
-        console.log(wrong);
-    }
-
-    if ($("input[name='tq3']:checked").val() == tq3) {
-        correct++;
-        console.log(correct);
-    }
-    else {
-        wrong++;
-        console.log(wrong);
-    }
-
-    if ($("input[name='tq4']:checked").val() == tq4) {
-        correct++;
-        console.log(correct);
-    }
-    else {
-        wrong++;
-        console.log(wrong);
-    }
-}
-
-function gameOver() {
-    stop();
-    checkAnswers();
-    $("#correct").text("Correct: " + correct);
-    $("#wrong").text("Wrong: " + wrong);
 }
 
 $(function() {
-    $("#submit").on("click", gameOver);
-    start();
+    $("#a").on("click", function() {
+        $("div[target='answer']").removeClass("bg-warning text-dark");
+        $("span[target='answerText'").removeClass("selected");
+        $("#adiv").addClass("bg-warning text-dark");
+        $("#aText").addClass("selected");
+        console.log("A click");
+    });
+    $("#b").on("click", function() {
+        $("div[target='answer']").removeClass("bg-warning text-dark");
+        $("span[target='answerText'").removeClass("selected");
+        $("#bdiv").addClass("bg-warning text-dark");
+        $("#bText").addClass("selected");
+        console.log("B click");
+    });
+    $("#c").on("click", function() {
+        $("div[target='answer']").removeClass("bg-warning text-dark");
+        $("span[target='answerText'").removeClass("selected");
+        $("#cdiv").addClass("bg-warning text-dark");
+        $("#cText").addClass("selected");
+        console.log("C click");
+    });
+    $("#d").on("click", function() {
+        $("div[target='answer']").removeClass("bg-warning text-dark");
+        $("span[target='answerText'").removeClass("selected");
+        $("#ddiv").addClass("bg-warning text-dark");
+        $("#dText").addClass("selected");
+        console.log("D click");
+    });
+    nextQuestion();
 });

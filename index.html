@@ -18,8 +18,11 @@
         border-width: 3px !important;
     }
     .activeList {
-        background-color: #ffeeba;
+        background-color: #ffc107;
         color: black;
+    }
+    .timerText {
+        font-size: 100pt !important;
     }
     </style>
 </head>
@@ -29,21 +32,21 @@
             <div class="col border border-light border-3 m-2">
                 <!--Monetary Progression-->
                 <h3><ul>
-                    <b><li>$1,000,000</li></b>
-                    <li>$500,000</li>
-                    <li>$250,000</li>
-                    <li>$125,000</li>
-                    <li>$64,000</li>
-                    <b><li>$32,000</li></b>
-                    <li>$16,000</li>
-                    <li>$8,000</li>
-                    <li>$4,000</li>
-                    <li>$2,000</li>
-                    <b><li>$1,000</li></b>
-                    <li>$500</li>
-                    <li>$300</li>
-                    <li>$200</li>
-                    <li class="activeList">$100</li>
+                    <b><li class="" id="1000000">$1,000,000</li></b>
+                    <li class="" id="500000">$500,000</li>
+                    <li class="" id="250000">$250,000</li>
+                    <li class="" id="125000">$125,000</li>
+                    <li class="" id="64000">$64,000</li>
+                    <b><li class="" id="32000">$32,000</li></b>
+                    <li class="" id="16000">$16,000</li>
+                    <li class="" id="8000">$8,000</li>
+                    <li class="" id="4000">$4,000</li>
+                    <li class="" id="2000">$2,000</li>
+                    <b><li class="" id="1000">$1,000</li></b>
+                    <li class="" id="500">$500</li>
+                    <li class="" id="300">$300</li>
+                    <li class="" id="200">$200</li>
+                    <li class="activeList" id="100">$100</li>
                 </ul></h3>
             </div>
             <div class="col-md-8 col-12 text-center m-2">
@@ -52,34 +55,39 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="timerText">00</h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col text-center border border-light border-3 p-2 m-2">
                 <!--Question-->
-                <h2>Test Question</h2>
+                <h2 id="question">Test Question</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col border border-light border-3 p-2 m-2">
+            <div class="col border border-light border-3 p-2 m-2" target="answer" id="adiv">
                 <!--Answer A-->
-                <h3>Test Answer</h3>
+                <h3 id="a">A: <span class="" id="aText" target="answerText"></span></h3>
             </div>
-            <div class="col border border-light border-3 p-2 m-2">
+            <div class="col border border-light border-3 p-2 m-2" target="answer" id="bdiv">
                 <!--Answer B-->
-                <h3>Test Answer</h3>
+                <h3 id="b">B: <span class="" id="bText" target="answerText"></span></h3>
             </div>
         </div>
         <div class="row">
-            <div class="col border border-light border-3 p-2 m-2">
+            <div class="col border border-light border-3 p-2 m-2" target="answer" id="cdiv">
                 <!--Answer C-->
-                <h3>Test Answer</h3>
+                <h3 id="c">C: <span class="" id="cText" target="answerText"></span></h3>
             </div>
-            <div class="col border border-light border-3 p-2 m-2">
+            <div class="col border border-light border-3 p-2 m-2" target="answer" id="ddiv">
                 <!--Answer D-->
-                <h3>Test Answer</h3>
+                <h3 id="d">D: <span class="" id="dText" target="answerText"></span></h3>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary">Final Answer</button>
+                <button type="button" class="btn btn-primary" onclick="checkAnswers()">Final Answer</button>
             </div>
         </div>
     </div>
