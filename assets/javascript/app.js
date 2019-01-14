@@ -189,6 +189,7 @@ function millionaire() {
 //Run if person wished to walk away with current money
 function walkAway() {
     stop();
+    //changes question back to previously correct answer, outputs amound won and updates value list
     $("li").removeClass("activeList");
     questionNumber--;
     currentQuestion = "q" + questionNumber;
@@ -197,6 +198,7 @@ function walkAway() {
     $("#timerText").text(moneyText);
 }
 
+//Loads the next question
 function nextQuestion() {
     //set next question
     $("#question").text(questions[currentQuestion].qText);
@@ -216,6 +218,7 @@ function nextQuestion() {
     $("#" + questions[currentQuestion].worth).addClass("activeList");
 }
 
+//Checks to see if answer is correct or wrong
 function checkAnswers() {
     //shows if a button has actually been clicked
     console.log($(".selected").text());
@@ -263,47 +266,31 @@ function checkAnswers() {
     }
 }
 
-//browser events and user interactivity code
+//handles click events on answers
+function clicky() {
+    //get letter clicked
+    let letter = event.target.id;
+
+    //These two lines blank out all answers, ensuring only one can be selected at a time.
+    $("div[target='answer']").removeClass("bg-warning text-dark");
+    $("span[target='answerText'").removeClass("selected");
+
+    //Add background color to currently selected answer
+    //Currently selected answer is denoted internally by adding a blank "selected" CSS class
+    $("#" + letter + "div").addClass("bg-warning text-dark");
+    $("#" + letter + "Text").addClass("selected");
+
+    //Log the click for debugging purposes
+    console.log(letter + " click");
+}
+
+
+
+
+/*
+EVENT LISTENING AND GAME INITIALIZATION CODE
+*/
 $(function() {
-    //Listen for mouse click on answer a
-    $("#a").on("click", function() {
-        //These two lines blank out all answers, ensuring only one can be selected at a time.
-        $("div[target='answer']").removeClass("bg-warning text-dark");
-        $("span[target='answerText'").removeClass("selected");
-
-        //Add background color to currently selected answer
-        //Currently selected answer is denoted internally by adding a blank "selected" CSS class
-        $("#adiv").addClass("bg-warning text-dark");
-        $("#aText").addClass("selected");
-
-        //Log the click for debugging purposes
-        console.log("A click");
-    });
-    $("#b").on("click", function() {
-        $("div[target='answer']").removeClass("bg-warning text-dark");
-        $("span[target='answerText'").removeClass("selected");
-        $("#bdiv").addClass("bg-warning text-dark");
-        $("#bText").addClass("selected");
-        console.log("B click");
-    });
-    $("#c").on("click", function() {
-        $("div[target='answer']").removeClass("bg-warning text-dark");
-        $("span[target='answerText'").removeClass("selected");
-        $("#cdiv").addClass("bg-warning text-dark");
-        $("#cText").addClass("selected");
-        console.log("C click");
-    });
-    $("#d").on("click", function() {
-        $("div[target='answer']").removeClass("bg-warning text-dark");
-        $("span[target='answerText'").removeClass("selected");
-        $("#ddiv").addClass("bg-warning text-dark");
-        $("#dText").addClass("selected");
-        console.log("D click");
-    });
-
-    //runs on document ready to load first question
-    nextQuestion();
-
-    //loads a popup explaining instructions.  game start function is called when modal confirmation button is pressed.
-    $("#exampleModalCenter").modal();
+    $(".ans").on("click", clicky);      //Listen for clicks on answers
+    $("#exampleModalCenter").modal();   //Instructions pop-up.  Game initializes on confirmation.
 });
