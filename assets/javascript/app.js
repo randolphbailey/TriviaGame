@@ -6,7 +6,8 @@ var questions = {
         b: "Beep! Beep!",
         c: "Aooga! Aooga!",
         d: "Vroom! Vroom!",
-        correctAns: "Beep! Beep!"
+        correctAns: "Beep! Beep!",
+        correctDiv: "bdiv"
     },
     q2: {
         worth: 200,
@@ -15,7 +16,8 @@ var questions = {
         b: "On the knees",
         c: "Around the throat",
         d: "On the hips",
-        correctAns: "Around the throat"
+        correctAns: "Around the throat",
+        correctDiv: "cdiv"
     },
     q3: {
         worth: 300,
@@ -24,7 +26,8 @@ var questions = {
         b: "Swing",
         c: "Lambada",
         d: "Polka",
-        correctAns: "Polka" 
+        correctAns: "Polka",
+        correctDiv: "ddiv"
     },
     q4: {
         worth: 500,
@@ -33,7 +36,8 @@ var questions = {
         b: "Dog Latin",
         c: "Duck Latin",
         d: "Pig Latin",
-        correctAns: "Pig Latin"
+        correctAns: "Pig Latin",
+        correctDiv: "ddiv"
     },
     q5: {
         worth: 1000,
@@ -42,7 +46,8 @@ var questions = {
         b: "Wing",
         c: "Leg",
         d: "Gizzard",
-        correctAns: "Leg" 
+        correctAns: "Leg",
+        correctDiv: "cdiv"
     },
     q6: {
         worth: 2000,
@@ -51,7 +56,8 @@ var questions = {
         b: "Wide receiver",
         c: "Tight end",
         d: "Quarterback",
-        correctAns: "Quarterback"
+        correctAns: "Quarterback",
+        correctDiv: "ddiv"
     },
     q7: {
         worth: 4000,
@@ -60,7 +66,8 @@ var questions = {
         b: "Mercury",
         c: "Cupid",
         d: "Poseidon",
-        correctAns: "Cupid"
+        correctAns: "Cupid",
+        correctDiv: "cdiv"
     },
     q8: {
         worth: 8000,
@@ -69,7 +76,8 @@ var questions = {
         b: "Jurassic Park",
         c: "Raiders of the Lost Ark",
         d: "Close Encounters of the Third Kind",
-        correctAns: "Close Encounters of the Third Kind"
+        correctAns: "Close Encounters of the Third Kind",
+        correctDiv: "ddiv"
     },
     q9: {
         worth: 16000,
@@ -78,7 +86,8 @@ var questions = {
         b: "Tombstone",
         c: "El Paso",
         d: "Dodge City",
-        correctAns: "Tombstone"
+        correctAns: "Tombstone",
+        correctDiv: "bdiv"
     },
     q10: {
         worth: 32000,
@@ -87,7 +96,8 @@ var questions = {
         b: "February",
         c: "September",
         d: "November",
-        correctAns: "August"
+        correctAns: "August",
+        correctDiv: "adiv"
     },
     q11: {
         worth: 64000,
@@ -96,7 +106,8 @@ var questions = {
         b: "Minotaur",
         c: "Dragon",
         d: "Golem",
-        correctAns: "Phoenix"
+        correctAns: "Phoenix",
+        correctDiv: "adiv"
     },
     q12: {
         worth: 125000,
@@ -105,7 +116,8 @@ var questions = {
         b: "Niels Bohr",
         c: "Louis Pasteur",
         d: "Jonas Salk",
-        correctAns: "Jonas Salk"
+        correctAns: "Jonas Salk",
+        correctDiv: "ddiv"
     },
     q13: {
         worth: 250000,
@@ -114,7 +126,8 @@ var questions = {
         b: "Judaism",
         c: "Hinduism",
         d: "Christianity",
-        correctAns: "Hinduism"
+        correctAns: "Hinduism",
+        correctDiv: "cdiv"
     },
     q14: {
         worth: 500000,
@@ -123,7 +136,8 @@ var questions = {
         b: "Le Corbusier",
         c: "Frank Gehry",
         d: "I.M. Pei",
-        correctAns: "I.M. Pei"
+        correctAns: "I.M. Pei",
+        correctDiv: "ddiv"
     },
     q15: {
         worth: 1000000,
@@ -132,7 +146,8 @@ var questions = {
         b: "Richard Nixon",
         c: "Jimmy Carter",
         d: "Gerald Ford",
-        correctAns: "Richard Nixon"
+        correctAns: "Richard Nixon",
+        correctDiv: "bdiv"
     }
 }
 var questionNumber = 1;
@@ -141,6 +156,8 @@ var time = 30;
 var intervalID;
 
 function start() {
+    time = 30;
+    $(".timerText").text(time);
     intervalID = setInterval(countDown, 1000);
 }
 
@@ -171,14 +188,20 @@ function nextQuestion() {
 
 function checkAnswers() {
     console.log($(".selected").text());
-    console.log(questions[currentQuestion].correctAns);
     if ($(".selected").text() == questions[currentQuestion].correctAns) {
+        stop();
         questionNumber++;
         currentQuestion = "q" + questionNumber;
+        $(".selected").parent().parent().removeClass("bg-warning");
+        $(".selected").parent().parent().addClass("bg-success");
+        $(".timerText").text("Correct!");
+        setTimeout(start, 5000);
         nextQuestion();
     }
     else {
-    console.log("wrong");
+        $("#" + questions[currentQuestion].correctDiv).addClass("bg-success");
+        stop();
+        $(".timerText").text("Game Over!");
     }
 }
 
@@ -212,4 +235,5 @@ $(function() {
         console.log("D click");
     });
     nextQuestion();
+    $("#exampleModalCenter").modal();
 });
