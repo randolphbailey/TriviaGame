@@ -189,7 +189,7 @@ function millionaire() {
 //Run if person wished to walk away with current money
 function walkAway() {
     stop();
-    //changes question back to previously correct answer, outputs amound won and updates value list
+    //changes question back to previously correct answer, outputs amount won and updates value list
     $("li").removeClass("activeList");
     questionNumber--;
     currentQuestion = "q" + questionNumber;
