@@ -153,8 +153,7 @@ var questions = [
 
 
 var questionNumber = 0;
-var time;
-var intervalID;
+var time, intervalID, winnings;
 
 //start 30 second timer and update HTML on page, call countDown function to decrement time
 function start() {
@@ -237,7 +236,7 @@ function checkAnswers() {
         $(".selected").parent().parent().removeClass("bg-warning").addClass("bg-success");
 
         //Set timer area to show correct answer
-        $("#timerText").text("Correct!");
+        $("#timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
 
         //Set two 5 second timeouts.  First will restart 30 second clock.  Second loads next question.
         setTimeout(start, 5000);
@@ -246,6 +245,11 @@ function checkAnswers() {
     }
     //run this on wrong answer
     else {
+        //Checkpoint logic
+        if (questionNumber <= 4) { winnings = "$0"; }
+        else if (questionNumber >= 5 && questionNumber <= 9) { winnings = "$1,000"; }
+        else { winnings = "$32,000"; }
+
         //Set background of correct answer to green.  Leave selected wrong answer as orange
         $("#" + questions[questionNumber].correctDiv).addClass("bg-success");
         
@@ -253,7 +257,7 @@ function checkAnswers() {
         stop();
 
         //Show game over
-        $("#timerText").text("Game Over!");
+        $("#timerText").text("Wrong Answer! You win " + winnings);
 
         //Game code terminates
     }

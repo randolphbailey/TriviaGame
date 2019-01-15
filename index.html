@@ -10,21 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="assets/javascript/app.js"></script>
-    <style>
-    body {
-        background-color: midnightblue;
-    }
-    .border-3 {
-        border-width: 3px !important;
-    }
-    .activeList {
-        background-color: #ffc107;
-        color: black;
-    }
-    .timerText {
-        font-size: 100pt !important;
-    }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="text-light">
     <div class="container">
@@ -62,7 +48,7 @@
         <div class="row">
             <div class="col text-center border border-light border-3 p-2 m-2">
                 <!--Question-->
-                <h2 id="question">Test Question</h2>
+                <h2 id="question">Game Not Initialized</h2>
             </div>
         </div>
         <div class="row">
@@ -85,10 +71,13 @@
                 <h3 class="ans" id="d">D: <span class="ans" id="dText" target="answerText"></span></h3>
             </div>
         </div>
+        <br>
         <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn btn-primary" onclick="checkAnswers()">Final Answer</button>
-                <button type="button" class="btn btn-warning" onclick="walkAway()">Walk Away</button>
+            <div class="col text-center">
+                <button type="button" class="btn btn-success btn-lg" onclick="checkAnswers()">Final Answer</button>
+            </div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-warning btn-lg" onclick="walkAway()">Walk Away</button>
             </div>
         </div>
     </div>

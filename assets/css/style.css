@@ -1,0 +1,13 @@
+body {
+    background-color: midnightblue;
+}
+.border-3 {
+    border-width: 3px !important;
+}
+.activeList {
+    background-color: #ffc107;
+    color: black;
+}
+.timerText {
+    font-size: 100pt !important;
+}
