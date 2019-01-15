@@ -150,25 +150,16 @@ var questions = [
         correctAns: "b",
         correctDiv: "bdiv"
     }];
-
-//Question number
 var q = 0;
-//Initialize time value, interval var and current winnings var.
 var time, intervalID, winnings;
-
-//start 30 second timer and update HTML on page, call countDown function to decrement time
 function start() {
     time = 30;
     $("#timerText").text(time);
     intervalID = setInterval(countDown, 1000);
 }
-
-//stop the timer
 function stop() {
     clearInterval(intervalID);
 }
-
-//decrement time elapsed and check to see if time has run out
 function countDown() {
     time--;
     $("#timerText").text(time);
@@ -177,120 +168,58 @@ function countDown() {
         checkAnswers();
     }
 }
-
-//Run if person correctly guesses million dollar question
 function millionaire() {
     $("#timerText").text("Millionaire!");
 }
-
-//Run if person wished to walk away with current money
 function walkAway() {
     stop();
-    //changes question back to previously correct answer, outputs amount won and updates value list
     $("li").removeClass("activeList");
     q--;
     $("#" + questions[q].worth).addClass("activeList");
     let moneyText = "Congratulations!  You won " + $("#" + questions[q].worth).text() + "!";
     $("#timerText").text(moneyText);
 }
-
-//Loads the next question
 function nextQuestion() {
-    //set next question
     $("#question").text(questions[q].qText);
-
-    //set answers for next question
     $("#a").text(questions[q].a);
     $("#b").text(questions[q].b);
     $("#c").text(questions[q].c);
     $("#d").text(questions[q].d);
-
-    //blank out background colors for active guess and correct answer
     $(".ans").removeClass("bg-success text-dark selected");
-
-    //increment question value
     $("li").removeClass("activeList");
     $("#" + questions[q].worth).addClass("activeList");
 }
-
-//Checks to see if answer is correct or wrong
 function checkAnswers() {
-    //shows if a button has actually been clicked
-    console.log($(".selected").text());
-
-    //check if answer given is correct
     if ($(".selected").text().slice(0,1).toLowerCase() == questions[q].correctAns) {
-        
-        //stop the timer
         stop();
-
-        //increment question number in preparation for loading of next question since the answer was correct
         q++;
-
-        //Check to see if contestant has won the million dollars
         if (q == 15) {
             stop();
             millionaire();
         }
         else {
-        //change correct answer background from selected orange to correct green
         $(".selected").parent().removeClass("bg-warning").addClass("bg-success");
-
-        //Set timer area to show correct answer
         $("#timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
-
-        //Set two 5 second timeouts.  First will restart 30 second clock.  Second loads next question.
         setTimeout(start, 5000);
         setTimeout(nextQuestion, 5000);
         }
     }
-    //run this on wrong answer
     else {
-        //Checkpoint logic
         if (q <= 4) { winnings = "$0"; }
         else if (q >= 5 && q <= 9) { winnings = "$1,000"; }
         else { winnings = "$32,000"; }
-
-        //Set background of correct answer to green.  Leave selected wrong answer as orange
         $("#" + questions[q].correctDiv).addClass("bg-success");
-        
-        //Stop timer
         stop();
-
-        //Show game over
         $("#timerText").text("Wrong Answer! You win " + winnings);
-
-        //Game code terminates
     }
 }
-
-//handles click events on answers
 function clicky() {
-    
-    //get letter clicked
     let letter = event.target.id;
-
-    //Log what was clicked for debugging purposes
-    console.log(letter + " click");
-
-    //Trim target ID if div clicked
     letter = letter.slice(0,1);
-
-    //This line blanks out all answers, ensuring only one can be selected at a time.
     $(".ans").removeClass("bg-warning text-dark selected");
-
-    //Add background color to currently selected answer
-    //Currently selected answer is denoted internally by adding a blank "selected" CSS class
     $("#" + letter + "div").addClass("bg-warning text-dark");
     $("#" + letter).addClass("selected");
 }
-
-
-
-
-/*
-EVENT LISTENING AND GAME INITIALIZATION CODE
-*/
 $(function() {
     $(".ans").on("click", clicky);      //Listen for clicks on answers
     $("#ins").modal();   //Instructions pop-up.  Game initializes on confirmation.

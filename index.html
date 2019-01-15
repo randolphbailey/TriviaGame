@@ -18,21 +18,21 @@
             <div class="col border border-light border-3 m-2">
                 <!--Monetary Progression-->
                 <h3><ul>
-                    <b><li class="" id="1000000">$1,000,000</li></b>
-                    <li class="" id="500000">$500,000</li>
-                    <li class="" id="250000">$250,000</li>
-                    <li class="" id="125000">$125,000</li>
-                    <li class="" id="64000">$64,000</li>
-                    <b><li class="" id="32000">$32,000</li></b>
-                    <li class="" id="16000">$16,000</li>
-                    <li class="" id="8000">$8,000</li>
-                    <li class="" id="4000">$4,000</li>
-                    <li class="" id="2000">$2,000</li>
-                    <b><li class="" id="1000">$1,000</li></b>
-                    <li class="" id="500">$500</li>
-                    <li class="" id="300">$300</li>
-                    <li class="" id="200">$200</li>
-                    <li class="activeList" id="100">$100</li>
+                    <b><li id="1000000">$1,000,000</li></b>
+                    <li id="500000">$500,000</li>
+                    <li id="250000">$250,000</li>
+                    <li id="125000">$125,000</li>
+                    <li id="64000">$64,000</li>
+                    <b><li id="32000">$32,000</li></b>
+                    <li id="16000">$16,000</li>
+                    <li id="8000">$8,000</li>
+                    <li id="4000">$4,000</li>
+                    <li id="2000">$2,000</li>
+                    <b><li id="1000">$1,000</li></b>
+                    <li id="500">$500</li>
+                    <li id="300">$300</li>
+                    <li id="200">$200</li>
+                    <li id="100">$100</li>
                 </ul></h3>
             </div>
             <div class="col-md-8 col-12 text-center m-2">
@@ -52,23 +52,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col border border-light border-3 p-2 m-2" target="answer" id="adiv">
+            <div class="col border border-light border-3 p-2 m-2 ans" id="adiv">
                 <!--Answer A-->
-                <h3 class="ans" id="a">A: <span class="ans" id="aText" target="answerText"></span></h3>
+                <h3 class="ans" id="a"></span></h3>
             </div>
-            <div class="col border border-light border-3 p-2 m-2" target="answer" id="bdiv">
+            <div class="col border border-light border-3 p-2 m-2 ans" id="bdiv">
                 <!--Answer B-->
-                <h3 class="ans" id="b">B: <span class="ans" id="bText" target="answerText"></span></h3>
+                <h3 class="ans" id="b"></h3>
             </div>
         </div>
         <div class="row">
-            <div class="col border border-light border-3 p-2 m-2" target="answer" id="cdiv">
+            <div class="col border border-light border-3 p-2 m-2 ans" id="cdiv">
                 <!--Answer C-->
-                <h3 class="ans" id="c">C: <span class="ans" id="cText" target="answerText"></span></h3>
+                <h3 class="ans" id="c"></h3>
             </div>
-            <div class="col border border-light border-3 p-2 m-2" target="answer" id="ddiv">
+            <div class="col border border-light border-3 p-2 m-2 ans" id="ddiv">
                 <!--Answer D-->
-                <h3 class="ans" id="d">D: <span class="ans" id="dText" target="answerText"></span></h3>
+                <h3 class="ans" id="d"></h3>
             </div>
         </div>
         <br>
@@ -81,15 +81,14 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!--End of Page HTML and Bootstrap container-->
+
+    <!-- Initial Instructions Modal Pop-up -->
+    <div class="modal fade" id="ins" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title text-dark" id="exampleModalCenterTitle">Instructions</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body text-dark">
               You will have 30 seconds to answer the questions.  Good Luck!
