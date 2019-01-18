@@ -175,7 +175,7 @@ function reset() {
 
 //Run if person correctly guesses million dollar question
 function millionaire() {
-    $(".timerText").text("Millionaire!");
+    $(".timerText").text("Millionaire!").addClass("gold");
 }
 
 //Run if person wished to walk away with current money
@@ -184,7 +184,7 @@ function walkAway() {
     //changes question back to previously correct answer, outputs amount won and updates value list
     q--;
     $("li").removeClass("activeList");
-    let moneyText = $("li:contains('" + questions[q].worth + "')").addClass("activeList").text();
+    let moneyText = $("li:contains('" + questions[q].worth + "')").last().addClass("activeList").text();
     $(".timerText").text("Congratulations!  You won " + moneyText + "!");
 }
 
@@ -204,7 +204,7 @@ function nextQuestion() {
 
     //increment question value
     $("li").removeClass("activeList");
-    $("li:contains('" + questions[q].worth + "')").addClass("activeList");
+    $("li:contains('" + questions[q].worth + "')").last().addClass("activeList");
 }
 
 //Checks to see if answer is correct or wrong
@@ -231,10 +231,10 @@ function checkAnswers() {
         $(".selected").removeClass("bg-warning").addClass("bg-success");
 
         //Set timer area to show correct answer
-        $(".timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
+        $(".timerText").html("Correct!<br><h1>Next Question in 3 Seconds</h1>");
 
-        //Set 5 second timeout.  Runs two functions to both start clock and load next question.
-        nextID = setTimeout(function() { start(); nextQuestion(); }, 5000);
+        //Set 3 second timeout.  Runs two functions to both start clock and load next question.
+        nextID = setTimeout(function() { start(); nextQuestion(); }, 3000);
         }
     }
     //run this on wrong answer

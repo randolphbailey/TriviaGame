@@ -11,3 +11,7 @@ body {
 .timerText {
     font-size: 100pt !important;
 }
+.gold {
+    color: gold;
+    text-shadow: 1px 1px black;
+}
