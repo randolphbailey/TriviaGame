@@ -7,8 +7,7 @@ var questions = [
         b: "B: Beep! Beep!",
         c: "C: Aooga! Aooga!",
         d: "D: Vroom! Vroom!",
-        correctAns: "b",
-        correctDiv: "bdiv"
+        correctAns: "b"
     },
     {
         worth: 200,
@@ -17,8 +16,7 @@ var questions = [
         b: "B: On the knees",
         c: "C: Around the throat",
         d: "D: On the hips",
-        correctAns: "c",
-        correctDiv: "cdiv"
+        correctAns: "c"
     },
     {
         worth: 300,
@@ -27,8 +25,7 @@ var questions = [
         b: "B: Swing",
         c: "C: Lambada",
         d: "D: Polka",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 500,
@@ -37,8 +34,7 @@ var questions = [
         b: "B: Dog Latin",
         c: "C: Duck Latin",
         d: "D: Pig Latin",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 1000,
@@ -47,8 +43,7 @@ var questions = [
         b: "B: Wing",
         c: "C: Leg",
         d: "D: Gizzard",
-        correctAns: "c",
-        correctDiv: "cdiv"
+        correctAns: "c"
     },
     {
         worth: 2000,
@@ -57,8 +52,7 @@ var questions = [
         b: "B: Wide receiver",
         c: "C: Tight end",
         d: "D: Quarterback",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 4000,
@@ -67,8 +61,7 @@ var questions = [
         b: "B: Mercury",
         c: "C: Cupid",
         d: "D: Poseidon",
-        correctAns: "c",
-        correctDiv: "cdiv"
+        correctAns: "c"
     },
     {
         worth: 8000,
@@ -77,8 +70,7 @@ var questions = [
         b: "B: Jurassic Park",
         c: "C: Raiders of the Lost Ark",
         d: "D: Close Encounters of the Third Kind",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 16000,
@@ -87,8 +79,7 @@ var questions = [
         b: "B: Tombstone",
         c: "C: El Paso",
         d: "D: Dodge City",
-        correctAns: "b",
-        correctDiv: "bdiv"
+        correctAns: "b"
     },
     {
         worth: 32000,
@@ -97,8 +88,7 @@ var questions = [
         b: "B: February",
         c: "C: September",
         d: "D: November",
-        correctAns: "a",
-        correctDiv: "adiv"
+        correctAns: "a"
     },
     {
         worth: 64000,
@@ -107,8 +97,7 @@ var questions = [
         b: "B: Minotaur",
         c: "C: Dragon",
         d: "D: Golem",
-        correctAns: "a",
-        correctDiv: "adiv"
+        correctAns: "a"
     },
     {
         worth: 125000,
@@ -117,8 +106,7 @@ var questions = [
         b: "B: Niels Bohr",
         c: "C: Louis Pasteur",
         d: "D: Jonas Salk",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 250000,
@@ -127,8 +115,7 @@ var questions = [
         b: "B: Judaism",
         c: "C: Hinduism",
         d: "D: Christianity",
-        correctAns: "c",
-        correctDiv: "cdiv"
+        correctAns: "c"
     },
     {
         worth: 500000,
@@ -137,8 +124,7 @@ var questions = [
         b: "B: Le Corbusier",
         c: "C: Frank Gehry",
         d: "D: I.M. Pei",
-        correctAns: "d",
-        correctDiv: "ddiv"
+        correctAns: "d"
     },
     {
         worth: 1000000,
@@ -147,8 +133,7 @@ var questions = [
         b: "B: Richard Nixon",
         c: "C: Jimmy Carter",
         d: "D: Gerald Ford",
-        correctAns: "b",
-        correctDiv: "bdiv"
+        correctAns: "b"
     }];
 
 //Question number
@@ -244,7 +229,7 @@ function checkAnswers() {
         }
         else {
         //change correct answer background from "selected orange" to "correct green"
-        $(".selected").parent().removeClass("bg-warning").addClass("bg-success");
+        $(".selected").removeClass("bg-warning").addClass("bg-success");
 
         //Set timer area to show correct answer
         $("#timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
@@ -261,7 +246,7 @@ function checkAnswers() {
         else { winnings = "$32,000"; }
 
         //Set background of correct answer to green.  Leave selected wrong answer as orange
-        $("#" + questions[q].correctDiv).addClass("bg-success");
+        $("#" + questions[q].correctAns).addClass("bg-success");
 
         //Show game over
         $("#timerText").text("Wrong Answer! You win " + winnings);
@@ -276,19 +261,12 @@ function clicky() {
     //get id tag value of letter clicked
     let letter = event.target.id;
 
-    //Log what was clicked for debugging purposes
-    console.log(letter + " click");
-
-    //Trim target ID if div clicked
-    letter = letter.slice(0,1);
-
     //This line blanks out all answers, ensuring only one can be selected at a time.
     $(".ans").removeClass("bg-warning text-dark selected");
 
-    //Add background color to currently selected answer
+    //Re-Add background color only to currently selected answer
     //Currently selected answer is denoted internally by adding a blank "selected" CSS class
-    $("#" + letter + "div").addClass("bg-warning text-dark");
-    $("#" + letter).addClass("selected");
+    $("#" + letter).addClass("selected bg-warning text-dark");
 }
 
 
