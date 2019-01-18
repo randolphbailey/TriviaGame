@@ -292,6 +292,6 @@ function clicky() {
 EVENT LISTENING AND GAME INITIALIZATION CODE
 */
 $(function() {
-    $(".ans").on("click", clicky);      //Listen for clicks on answers
+    $(".ans").on("click", clicky);      //Listen for clicks on answers, runs function "clicky" when fired
     $("#ins").modal();   //Instructions pop-up.  Game initializes on confirmation.
 });
