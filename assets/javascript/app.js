@@ -1,7 +1,7 @@
 //set questions, answers, and other values
 var questions = [
     {
-        worth: 100,
+        worth: "$100",
         qText: "In the 'Road Runner and Coyote' cartoons, what famous sound does the Road Runner make?",
         a: "A: Ping! Ping!",
         b: "B: Beep! Beep!",
@@ -10,7 +10,7 @@ var questions = [
         correctAns: "b"
     },
     {
-        worth: 200,
+        worth: "$200",
         qText: "Where should choking victims place their hands to indicate to others that they need help?",
         a: "A: Over the eyes",
         b: "B: On the knees",
@@ -19,7 +19,7 @@ var questions = [
         correctAns: "c"
     },
     {
-        worth: 300,
+        worth: "$300",
         qText: "Which of these dance names is used to describe a fashionable dot?",
         a: "A: Hora",
         b: "B: Swing",
@@ -28,7 +28,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 500,
+        worth: "$500",
         qText: "In what 'language' would you say 'ello-hay' to greet your friends?",
         a: "A: Bull Latin",
         b: "B: Dog Latin",
@@ -37,7 +37,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 1000,
+        worth: "$1,000",
         qText: "What part of a chicken is commonly called the 'drumstick'?",
         a: "A: Breast",
         b: "B: Wing",
@@ -46,7 +46,7 @@ var questions = [
         correctAns: "c"
     },
     {
-        worth: 2000,
+        worth: "$2,000",
         qText: "What is the only position on a football team that can be 'sacked'?",
         a: "A: Center",
         b: "B: Wide receiver",
@@ -55,7 +55,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 4000,
+        worth: "$4,000",
         qText: "What god of love is often depicted as a chubby winged infant with a bow and arrow?",
         a: "A: Zeus",
         b: "B: Mercury",
@@ -64,7 +64,7 @@ var questions = [
         correctAns: "c"
     },
     {
-        worth: 8000,
+        worth: "$8,000",
         qText: "What Steven Spielberg film climaxes at a place called Devil's Tower?",
         a: "A: E.T.: The Extra-Terrestrial",
         b: "B: Jurassic Park",
@@ -73,7 +73,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 16000,
+        worth: "$16,000",
         qText: "In what U.S. town did the famous 1881 shoot-out at the O.K. Corral take place?",
         a: "A: Laramie",
         b: "B: Tombstone",
@@ -82,7 +82,7 @@ var questions = [
         correctAns: "b"
     },
     {
-        worth: 32000,
+        worth: "$32,000",
         qText: "Which of the following months has no U.S. federal holiday?",
         a: "A: August",
         b: "B: February",
@@ -91,7 +91,7 @@ var questions = [
         correctAns: "a"
     },
     {
-        worth: 64000,
+        worth: "$64,000",
         qText: "What mythological beast is reborn from its own ashes?",
         a: "A: Phoenix",
         b: "B: Minotaur",
@@ -100,7 +100,7 @@ var questions = [
         correctAns: "a"
     },
     {
-        worth: 125000,
+        worth: "$125,000",
         qText: "Who developed the first effective vaccine against polio?",
         a: "A: Albert Sabin",
         b: "B: Niels Bohr",
@@ -109,7 +109,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 250000,
+        worth: "$250,000",
         qText: "Which of the following is not a monotheistic religion?",
         a: "A: Islam",
         b: "B: Judaism",
@@ -118,7 +118,7 @@ var questions = [
         correctAns: "c"
     },
     {
-        worth: 500000,
+        worth: "$500,000",
         qText: "What architect designed the glass pyramid in the courtyard of the Louvre?",
         a: "A: Phillip Johnson",
         b: "B: Le Corbusier",
@@ -127,7 +127,7 @@ var questions = [
         correctAns: "d"
     },
     {
-        worth: 1000000,
+        worth: "$1,000,000",
         qText: "Which of these U.S. Presidents appeared on the television series 'Laugh-In'?",
         a: "A: Lyndon Johnson",
         b: "B: Richard Nixon",
@@ -145,7 +145,7 @@ var time, intervalID, winnings, nextID;
 //countDown function contains logic to clear interval when timer reaches 0
 function start() {
     time = 30;
-    $("#timerText").text(time);
+    $(".timerText").text(time);
     intervalID = setInterval(countDown, 1000);
 }
 
@@ -157,7 +157,7 @@ function stop() {
 //decrement time elapsed, update timer value in HTML, and check to see if time has run out
 function countDown() {
     time--;
-    $("#timerText").text(time);
+    $(".timerText").text(time);
     if (time == 0) {
         stop();
         checkAnswers();
@@ -175,18 +175,17 @@ function reset() {
 
 //Run if person correctly guesses million dollar question
 function millionaire() {
-    $("#timerText").text("Millionaire!");
+    $(".timerText").text("Millionaire!");
 }
 
 //Run if person wished to walk away with current money
 function walkAway() {
     stop();
     //changes question back to previously correct answer, outputs amount won and updates value list
-    $("li").removeClass("activeList");
     q--;
-    $("#" + questions[q].worth).addClass("activeList");
-    let moneyText = "Congratulations!  You won " + $("#" + questions[q].worth).text() + "!";
-    $("#timerText").text(moneyText);
+    $("li").removeClass("activeList");
+    let moneyText = $("li:contains('" + questions[q].worth + "')").addClass("activeList").text();
+    $(".timerText").text("Congratulations!  You won " + moneyText + "!");
 }
 
 //Loads the next question
@@ -205,7 +204,7 @@ function nextQuestion() {
 
     //increment question value
     $("li").removeClass("activeList");
-    $("#" + questions[q].worth).addClass("activeList");
+    $("li:contains('" + questions[q].worth + "')").addClass("activeList");
 }
 
 //Checks to see if answer is correct or wrong
@@ -232,7 +231,7 @@ function checkAnswers() {
         $(".selected").removeClass("bg-warning").addClass("bg-success");
 
         //Set timer area to show correct answer
-        $("#timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
+        $(".timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
 
         //Set 5 second timeout.  Runs two functions to both start clock and load next question.
         nextID = setTimeout(function() { start(); nextQuestion(); }, 5000);
@@ -249,7 +248,7 @@ function checkAnswers() {
         $("#" + questions[q].correctAns).addClass("bg-success");
 
         //Show game over
-        $("#timerText").text("Wrong Answer! You win " + winnings);
+        $(".timerText").text("Wrong Answer! You win " + winnings);
 
         //Game code terminates
     }
@@ -268,8 +267,6 @@ function clicky() {
     //Currently selected answer is denoted internally by adding a blank "selected" CSS class
     $("#" + letter).addClass("selected bg-warning text-dark");
 }
-
-
 
 
 /*
