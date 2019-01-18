@@ -153,10 +153,11 @@ var questions = [
 
 //Question number
 var q = 0;
-//Initialize time value, interval var and current winnings var.
-var time, intervalID, winnings;
+//Initialize time value, timer interval var, next question interval var, and current winnings var.
+var time, intervalID, winnings, nextID;
 
-//start 30 second timer and update HTML on page, call countDown function to decrement time
+//start 1 second timer that calls "countDown" function to update timer value on the page
+//countDown function contains logic to clear interval when timer reaches 0
 function start() {
     time = 30;
     $("#timerText").text(time);
@@ -168,7 +169,7 @@ function stop() {
     clearInterval(intervalID);
 }
 
-//decrement time elapsed and check to see if time has run out
+//decrement time elapsed, update timer value in HTML, and check to see if time has run out
 function countDown() {
     time--;
     $("#timerText").text(time);
@@ -176,6 +177,15 @@ function countDown() {
         stop();
         checkAnswers();
     }
+}
+
+//Resets game without needing to reload page.
+function reset() {
+    q = 0;
+    stop();
+    clearTimeout(nextID);
+    nextQuestion();
+    start();
 }
 
 //Run if person correctly guesses million dollar question
@@ -218,11 +228,11 @@ function checkAnswers() {
     //shows if a button has actually been clicked
     console.log($(".selected").text());
 
+    //stop timer
+    stop();
+
     //check if answer given is correct
-    if ($(".selected").text().slice(0,1).toLowerCase() == questions[q].correctAns) {
-        
-        //stop the timer
-        stop();
+    if ($(".selected").attr("id") == questions[q].correctAns) {
 
         //increment question number in preparation for loading of next question since the answer was correct
         q++;
@@ -233,15 +243,14 @@ function checkAnswers() {
             millionaire();
         }
         else {
-        //change correct answer background from selected orange to correct green
+        //change correct answer background from "selected orange" to "correct green"
         $(".selected").parent().removeClass("bg-warning").addClass("bg-success");
 
         //Set timer area to show correct answer
         $("#timerText").html("Correct!<br><h1>Next Question in 5 Seconds</h1>");
 
-        //Set two 5 second timeouts.  First will restart 30 second clock.  Second loads next question.
-        setTimeout(start, 5000);
-        setTimeout(nextQuestion, 5000);
+        //Set 5 second timeout.  Runs two functions to both start clock and load next question.
+        nextID = setTimeout(function() { start(); nextQuestion(); }, 5000);
         }
     }
     //run this on wrong answer
@@ -253,9 +262,6 @@ function checkAnswers() {
 
         //Set background of correct answer to green.  Leave selected wrong answer as orange
         $("#" + questions[q].correctDiv).addClass("bg-success");
-        
-        //Stop timer
-        stop();
 
         //Show game over
         $("#timerText").text("Wrong Answer! You win " + winnings);
@@ -267,7 +273,7 @@ function checkAnswers() {
 //handles click events on answers
 function clicky() {
     
-    //get letter clicked
+    //get id tag value of letter clicked
     let letter = event.target.id;
 
     //Log what was clicked for debugging purposes
