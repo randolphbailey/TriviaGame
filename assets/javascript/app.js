@@ -202,7 +202,7 @@ function nextQuestion() {
     //blank out background colors for active guess and correct answer
     $(".ans").removeClass("bg-success text-dark selected");
 
-    //increment question value
+    //increment question value.  "last()" required because 2nd jQuery search will return 500, and 500,000; 1,000 and 1,000,000
     $("li").removeClass("activeList");
     $("li:contains('" + questions[q].worth + "')").last().addClass("activeList");
 }
@@ -249,23 +249,18 @@ function checkAnswers() {
 
         //Show game over
         $(".timerText").text("Wrong Answer! You win " + winnings);
-
-        //Game code terminates
     }
 }
 
 //handles click events on answers
 function clicky() {
     
-    //get id tag value of letter clicked
-    let letter = event.target.id;
-
     //This line blanks out all answers, ensuring only one can be selected at a time.
     $(".ans").removeClass("bg-warning text-dark selected");
 
     //Re-Add background color only to currently selected answer
     //Currently selected answer is denoted internally by adding a blank "selected" CSS class
-    $("#" + letter).addClass("selected bg-warning text-dark");
+    $("#" + event.target.id).addClass("selected bg-warning text-dark");
 }
 
 
