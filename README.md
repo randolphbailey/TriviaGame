@@ -7,3 +7,4 @@ This is essentially a clone of the Who Wants to Be a Millionaire game in which t
 * jQuery
 * Bootstrap
 * Docker/nginx/caprover for deployment
+
